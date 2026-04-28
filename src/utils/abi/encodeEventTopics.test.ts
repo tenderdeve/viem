@@ -500,6 +500,141 @@ test("errors: event doesn't exist", () => {
   `)
 })
 
+test('anonymous event: no args', () => {
+  expect(
+    encodeEventTopics({
+      abi: [
+        {
+          inputs: [
+            {
+              indexed: true,
+              name: 'from',
+              type: 'address',
+            },
+            {
+              indexed: true,
+              name: 'to',
+              type: 'address',
+            },
+            {
+              indexed: false,
+              name: 'value',
+              type: 'uint256',
+            },
+          ],
+          name: 'Transfer',
+          type: 'event',
+          anonymous: true,
+        },
+      ],
+      eventName: 'Transfer',
+    }),
+  ).toEqual([])
+})
+
+test('anonymous event: named args', () => {
+  expect(
+    encodeEventTopics({
+      abi: [
+        {
+          inputs: [
+            {
+              indexed: true,
+              name: 'from',
+              type: 'address',
+            },
+            {
+              indexed: true,
+              name: 'to',
+              type: 'address',
+            },
+            {
+              indexed: false,
+              name: 'value',
+              type: 'uint256',
+            },
+          ],
+          name: 'Transfer',
+          type: 'event',
+          anonymous: true,
+        },
+      ],
+      eventName: 'Transfer',
+      args: {
+        from: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        to: '0xc961145a54C96E3aE9bAA048c4F4D6b04C13916b',
+      },
+    }),
+  ).toEqual([
+    '0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac',
+    '0x000000000000000000000000c961145a54c96e3ae9baa048c4f4d6b04c13916b',
+  ])
+})
+
+test('anonymous event: unnamed args', () => {
+  expect(
+    encodeEventTopics({
+      abi: [
+        {
+          inputs: [
+            {
+              indexed: true,
+              type: 'address',
+            },
+            {
+              indexed: true,
+              type: 'address',
+            },
+            {
+              indexed: false,
+              type: 'uint256',
+            },
+          ],
+          name: 'Transfer',
+          type: 'event',
+          anonymous: true,
+        },
+      ],
+      eventName: 'Transfer',
+      args: [
+        '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        '0xc961145a54C96E3aE9bAA048c4F4D6b04C13916b',
+      ],
+    }),
+  ).toEqual([
+    '0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac',
+    '0x000000000000000000000000c961145a54c96e3ae9baa048c4f4d6b04c13916b',
+  ])
+})
+
+test('non-anonymous event still includes signature topic', () => {
+  expect(
+    encodeEventTopics({
+      abi: [
+        {
+          inputs: [
+            {
+              indexed: true,
+              name: 'from',
+              type: 'address',
+            },
+          ],
+          name: 'Transfer',
+          type: 'event',
+          anonymous: false,
+        },
+      ],
+      eventName: 'Transfer',
+      args: {
+        from: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+      },
+    }),
+  ).toEqual([
+    '0xd4419cf35f6100c64400a46af29a62b98c54b65ce3e0009ad138010b5a1b1fba',
+    '0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac',
+  ])
+})
+
 test('https://github.com/wevm/viem/issues/3278', () => {
   const bugAbi = [
     {
