@@ -48,12 +48,17 @@ export function observe<callbacks extends Callbacks>(
   const unwatch = () => {
     const listeners = getListeners()
     if (!listeners.some((cb: any) => cb.id === callbackId)) return
-    const cleanup = cleanupCache.get(observerId)
-    if (listeners.length === 1 && cleanup) {
-      const p = cleanup()
-      if (p instanceof Promise) p.catch(() => {})
+    if (listeners.length === 1) {
+      const cleanup = cleanupCache.get(observerId)
+      if (cleanup) {
+        const p = cleanup()
+        if (p instanceof Promise) p.catch(() => {})
+      }
+      listenersCache.delete(observerId)
+      cleanupCache.delete(observerId)
+    } else {
+      unsubscribe()
     }
-    unsubscribe()
   }
 
   const listeners = getListeners()
