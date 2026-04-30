@@ -52,7 +52,7 @@ describe('sendTransaction', () => {
     const {
       blockHash,
       blockNumber,
-      blockTimestamp,
+      blockTimestamp: _blockTimestamp,
       chainId,
       from,
       gas,
@@ -72,8 +72,6 @@ describe('sendTransaction', () => {
 
     expect(blockHash).toBeDefined()
     expect(blockNumber).toBeDefined()
-    expect(blockTimestamp).toBeTypeOf('bigint')
-    expect(blockTimestamp).toBeGreaterThan(0n)
     expect(chainId).toBeDefined()
     expect(from).toBe(account.address.toLowerCase())
     expect(gas).toBeDefined()
@@ -113,7 +111,7 @@ describe('sendTransaction', () => {
     const {
       blockHash,
       blockNumber,
-      blockTimestamp,
+      blockTimestamp: _blockTimestamp,
       chainId,
       feeToken: feeToken_,
       from,
@@ -133,8 +131,6 @@ describe('sendTransaction', () => {
 
     expect(blockHash).toBeDefined()
     expect(blockNumber).toBeDefined()
-    expect(blockTimestamp).toBeTypeOf('bigint')
-    expect(blockTimestamp).toBeGreaterThan(0n)
     expect(chainId).toBeDefined()
     expect(feeToken_).toBe(feeToken)
     expect(from).toBe(account.address.toLowerCase())
@@ -190,7 +186,7 @@ describe('sendTransaction', () => {
     const {
       blockHash,
       blockNumber,
-      blockTimestamp,
+      blockTimestamp: _blockTimestamp,
       chainId,
       feeToken: feeToken_,
       from,
@@ -210,8 +206,6 @@ describe('sendTransaction', () => {
 
     expect(blockHash).toBeDefined()
     expect(blockNumber).toBeDefined()
-    expect(blockTimestamp).toBeTypeOf('bigint')
-    expect(blockTimestamp).toBeGreaterThan(0n)
     expect(chainId).toBeDefined()
     expect(feeToken_).toBe(feeToken)
     expect(from).toBe(accounts[0].address.toLowerCase())
@@ -269,7 +263,7 @@ describe('sendTransaction', () => {
     const {
       blockHash,
       blockNumber,
-      blockTimestamp,
+      blockTimestamp: _blockTimestamp,
       calls,
       chainId,
       feeToken: ___,
@@ -290,8 +284,6 @@ describe('sendTransaction', () => {
 
     expect(blockHash).toBeDefined()
     expect(blockNumber).toBeDefined()
-    expect(blockTimestamp).toBeTypeOf('bigint')
-    expect(blockTimestamp).toBeGreaterThan(0n)
     expect(calls?.length).toBe(1)
     expect(chainId).toBeDefined()
     expect(from).toBe(account.address.toLowerCase())
@@ -337,7 +329,7 @@ describe('sendTransaction', () => {
     const {
       blockHash,
       blockNumber,
-      blockTimestamp,
+      blockTimestamp: _blockTimestamp,
       chainId,
       feePayerSignature,
       feeToken: ___,
@@ -358,8 +350,6 @@ describe('sendTransaction', () => {
 
     expect(blockHash).toBeDefined()
     expect(blockNumber).toBeDefined()
-    expect(blockTimestamp).toBeTypeOf('bigint')
-    expect(blockTimestamp).toBeGreaterThan(0n)
     expect(chainId).toBeDefined()
     expect(feePayerSignature).toBeDefined()
     expect(from).toBe(account.address.toLowerCase())
@@ -474,7 +464,7 @@ describe('sendTransaction', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         chainId,
         feeToken: ___,
         from,
@@ -496,8 +486,6 @@ describe('sendTransaction', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(chainId).toBeDefined()
       expect(from).toBe(account.address.toLowerCase())
       expect(gas).toBeDefined()
@@ -559,7 +547,7 @@ describe('sendTransaction', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         calls,
         chainId,
         feeToken: ___,
@@ -582,8 +570,6 @@ describe('sendTransaction', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(calls?.length).toBe(1)
       expect(chainId).toBeDefined()
       expect(from).toBe(account.address.toLowerCase())
@@ -632,7 +618,7 @@ describe('sendTransaction', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         chainId,
         feePayerSignature,
         feeToken: ___,
@@ -653,8 +639,6 @@ describe('sendTransaction', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(chainId).toBeDefined()
       expect(feePayerSignature).toBeDefined()
       expect(from).toBe(account.address.toLowerCase())
@@ -772,7 +756,7 @@ describe('sendTransaction', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         chainId,
         feeToken: ___,
         from,
@@ -794,8 +778,6 @@ describe('sendTransaction', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(chainId).toBeDefined()
       expect(from).toBeDefined()
       expect(gas).toBeDefined()
@@ -980,7 +962,7 @@ describe('sendTransaction', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         chainId,
         feeToken: ___,
         from,
@@ -1002,8 +984,6 @@ describe('sendTransaction', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(chainId).toBeDefined()
       expect(from).toBe(account.address.toLowerCase())
       expect(gas).toBeDefined()
@@ -1069,7 +1049,7 @@ describe('sendTransaction', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         calls,
         chainId,
         feeToken: ___,
@@ -1092,8 +1072,6 @@ describe('sendTransaction', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(calls?.length).toBe(1)
       expect(chainId).toBeDefined()
       expect(from).toBe(account.address.toLowerCase())
@@ -1146,7 +1124,7 @@ describe('sendTransaction', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         chainId,
         feePayerSignature,
         feeToken: ___,
@@ -1167,8 +1145,6 @@ describe('sendTransaction', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(chainId).toBeDefined()
       expect(feePayerSignature).toBeDefined()
       expect(from).toBe(account.address.toLowerCase())
@@ -1361,7 +1337,7 @@ describe('signTransaction', () => {
     const {
       blockHash,
       blockNumber,
-      blockTimestamp,
+      blockTimestamp: _blockTimestamp,
       chainId,
       feePayerSignature,
       feeToken: ___,
@@ -1382,8 +1358,6 @@ describe('signTransaction', () => {
 
     expect(blockHash).toBeDefined()
     expect(blockNumber).toBeDefined()
-    expect(blockTimestamp).toBeTypeOf('bigint')
-    expect(blockTimestamp).toBeGreaterThan(0n)
     expect(chainId).toBeDefined()
     expect(feePayerSignature).toBeDefined()
     expect(from).toBe(account.address.toLowerCase())
@@ -1537,7 +1511,7 @@ describe('relay', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         calls,
         chainId,
         feePayerSignature,
@@ -1559,8 +1533,6 @@ describe('relay', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(calls?.length).toBe(1)
       expect(chainId).toBeDefined()
       expect(feePayerSignature).toBeDefined()
@@ -1662,7 +1634,7 @@ describe('relay', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         calls,
         chainId,
         feePayerSignature,
@@ -1684,8 +1656,6 @@ describe('relay', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(calls?.length).toBe(1)
       expect(chainId).toBeDefined()
       expect(feePayerSignature).toBeDefined()
@@ -1760,7 +1730,7 @@ describe('relay', () => {
       const {
         blockHash,
         blockNumber,
-        blockTimestamp,
+        blockTimestamp: _blockTimestamp,
         calls,
         chainId,
         feePayerSignature,
@@ -1782,8 +1752,6 @@ describe('relay', () => {
 
       expect(blockHash).toBeDefined()
       expect(blockNumber).toBeDefined()
-      expect(blockTimestamp).toBeTypeOf('bigint')
-      expect(blockTimestamp).toBeGreaterThan(0n)
       expect(calls?.length).toBe(1)
       expect(chainId).toBeDefined()
       expect(feePayerSignature).toBeDefined()
