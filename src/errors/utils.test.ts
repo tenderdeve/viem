@@ -1,6 +1,12 @@
-import { expect, test } from 'vitest'
+import { expect, test, vi } from 'vitest'
 
-import { getUrl } from './utils.js'
+// `test/setup.ts` globally mocks `./utils`; opt out so we exercise the
+// real implementation here.
+vi.unmock('./utils.js')
+
+const { getUrl } = await vi.importActual<typeof import('./utils.js')>(
+  './utils.js',
+)
 
 test('passes a credential-free URL through unchanged', () => {
   expect(getUrl('https://example.com/rpc')).toMatchInlineSnapshot(
