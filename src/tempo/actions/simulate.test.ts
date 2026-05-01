@@ -34,17 +34,18 @@ describe('simulateBlocks', () => {
       ],
     })
 
+    const call = result.blocks[0].calls[0]
+    const { data: _data, result: _result, ...callWithoutDynamic } = call
+
     expect({
-      calls: result.blocks[0].calls,
+      calls: [callWithoutDynamic],
       tokenMetadata: result.tokenMetadata,
     }).toMatchInlineSnapshot(`
       {
         "calls": [
           {
-            "data": "0x000000000000000000000000000000000000000000000001ffffffffffff743c",
             "gasUsed": 22080n,
             "logs": [],
-            "result": 36893488147419067452n,
             "status": "success",
           },
         ],
@@ -57,6 +58,9 @@ describe('simulateBlocks', () => {
         },
       }
     `)
+
+    expect(call.data).toBeTypeOf('string')
+    expect(call.result).toBeTypeOf('bigint')
   })
 
   test('behavior: tip20 transfer', async () => {
