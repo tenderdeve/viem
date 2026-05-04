@@ -500,6 +500,90 @@ test("errors: event doesn't exist", () => {
   `)
 })
 
+test('anonymous event: no args', () => {
+  expect(
+    encodeEventTopics({
+      abi: [
+        {
+          name: 'RawEvent',
+          type: 'event',
+          anonymous: true,
+          inputs: [
+            { name: 'topic0', type: 'bytes32', indexed: true },
+            { name: 'topic1', type: 'bytes32', indexed: true },
+            { name: 'topic2', type: 'bytes32', indexed: true },
+            { name: 'topic3', type: 'bytes32', indexed: true },
+          ],
+        },
+      ] as const,
+    }),
+  ).toEqual([])
+})
+
+test('anonymous event: with args', () => {
+  expect(
+    encodeEventTopics({
+      abi: [
+        {
+          name: 'RawEvent',
+          type: 'event',
+          anonymous: true,
+          inputs: [
+            { name: 'topic0', type: 'bytes32', indexed: true },
+            { name: 'topic1', type: 'bytes32', indexed: true },
+            { name: 'topic2', type: 'bytes32', indexed: true },
+            { name: 'topic3', type: 'bytes32', indexed: true },
+          ],
+        },
+      ] as const,
+      args: {
+        topic0:
+          '0x000000000000000000000000000000000000000000000000000000000000abcd',
+      },
+    }),
+  ).toEqual([
+    '0x000000000000000000000000000000000000000000000000000000000000abcd',
+    null,
+    null,
+    null,
+  ])
+})
+
+test('anonymous event: all topics', () => {
+  expect(
+    encodeEventTopics({
+      abi: [
+        {
+          name: 'RawEvent',
+          type: 'event',
+          anonymous: true,
+          inputs: [
+            { name: 'topic0', type: 'bytes32', indexed: true },
+            { name: 'topic1', type: 'bytes32', indexed: true },
+            { name: 'topic2', type: 'bytes32', indexed: true },
+            { name: 'topic3', type: 'bytes32', indexed: true },
+          ],
+        },
+      ] as const,
+      args: {
+        topic0:
+          '0x0000000000000000000000000000000000000000000000000000000000000000',
+        topic1:
+          '0x0000000000000000000000000000000000000000000000000000000000000001',
+        topic2:
+          '0x0000000000000000000000000000000000000000000000000000000000000002',
+        topic3:
+          '0x0000000000000000000000000000000000000000000000000000000000000003',
+      },
+    }),
+  ).toEqual([
+    '0x0000000000000000000000000000000000000000000000000000000000000000',
+    '0x0000000000000000000000000000000000000000000000000000000000000001',
+    '0x0000000000000000000000000000000000000000000000000000000000000002',
+    '0x0000000000000000000000000000000000000000000000000000000000000003',
+  ])
+})
+
 test('https://github.com/wevm/viem/issues/3278', () => {
   const bugAbi = [
     {
