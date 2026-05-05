@@ -592,10 +592,10 @@ export { sovaSepolia } from './definitions/sovaSepolia.js'
 export { spicy } from './definitions/spicy.js'
 export { stable } from './definitions/stable.js'
 export { stableTestnet } from './definitions/stableTestnet.js'
-/** @deprecated */
-/** @deprecated */
 export {
+  /** @deprecated */
   statusSepolia,
+  /** @deprecated */
   statusSepolia as statusNetworkSepolia,
 } from './definitions/statusNetworkSepolia.js'
 export { step } from './definitions/step.js'
