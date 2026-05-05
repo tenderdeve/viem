@@ -94,9 +94,6 @@ export function encodeEventTopics<
   if (abiItem.type !== 'event')
     throw new AbiEventNotFoundError(undefined, { docsPath })
 
-  const definition = formatAbiItem(abiItem)
-  const signature = toEventSelector(definition as EventDefinition)
-
   let topics: (Hex | Hex[] | null)[] = []
   if (args && 'inputs' in abiItem) {
     const indexedInputs = abiItem.inputs?.filter(
@@ -121,6 +118,12 @@ export function encodeEventTopics<
         }) ?? []
     }
   }
+
+  if ('anonymous' in abiItem && abiItem.anonymous)
+    return topics as (Hex | Hex[] | null)[] as EncodeEventTopicsReturnType
+
+  const definition = formatAbiItem(abiItem)
+  const signature = toEventSelector(definition as EventDefinition)
   return [signature, ...topics]
 }
 

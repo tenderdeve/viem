@@ -532,3 +532,46 @@ test('https://github.com/wevm/viem/issues/3278', () => {
     ]
   `)
 })
+
+test('anonymous event: no args', () => {
+  expect(
+    encodeEventTopics({
+      abi: [
+        {
+          name: 'RawEvent',
+          type: 'event',
+          anonymous: true,
+          inputs: [
+            { name: 'topic0', type: 'bytes32', indexed: true },
+            { name: 'topic1', type: 'bytes32', indexed: true },
+          ],
+        },
+      ] as const,
+    }),
+  ).toEqual([])
+})
+
+test('anonymous event: with args', () => {
+  expect(
+    encodeEventTopics({
+      abi: [
+        {
+          name: 'RawEvent',
+          type: 'event',
+          anonymous: true,
+          inputs: [
+            { name: 'topic0', type: 'bytes32', indexed: true },
+            { name: 'topic1', type: 'bytes32', indexed: true },
+          ],
+        },
+      ] as const,
+      args: {
+        topic0:
+          '0x000000000000000000000000000000000000000000000000000000000000abcd',
+      },
+    }),
+  ).toEqual([
+    '0x000000000000000000000000000000000000000000000000000000000000abcd',
+    null,
+  ])
+})
