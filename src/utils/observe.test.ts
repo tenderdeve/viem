@@ -1,6 +1,6 @@
 import { expect, test, vi } from 'vitest'
 
-import { observe } from './observe.js'
+import { cleanupCache, listenersCache, observe } from './observe.js'
 import { wait } from './wait.js'
 
 test('emits data to callbacks', async () => {
@@ -263,4 +263,25 @@ test('handles async cleanup errors', async () => {
   // Give the async cleanup time to execute and fail
   await wait(10)
   expect(cleanup).toHaveBeenCalledTimes(1)
+})
+
+test('removes cache entries when all listeners unsubscribe', async () => {
+  const id = 'observe-leak-test'
+
+  const emitter = vi.fn(({ emit }) => {
+    setTimeout(() => emit({ foo: 'bar' }), 100)
+    return () => {}
+  })
+
+  const unwatch1 = observe(id, { emit: vi.fn() }, emitter)
+  const unwatch2 = observe(id, { emit: vi.fn() }, emitter)
+
+  expect(listenersCache.has(id)).toBe(true)
+
+  unwatch1()
+  expect(listenersCache.has(id)).toBe(true)
+
+  unwatch2()
+  expect(listenersCache.has(id)).toBe(false)
+  expect(cleanupCache.has(id)).toBe(false)
 })
